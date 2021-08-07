@@ -9,13 +9,17 @@ import chat_plays_go as cpg
 import queue
 import time
 
+CHANNEL = "t4rquin"
+USERNAME = # Your bots nick
+OAUTH = # OAuth
+
 class Chatbot:
-    def __init__(self, channel):
+    def __init__(self):
         # Some basic variables used to configure the bot
         self.server = "irc.chat.twitch.tv" # Server
-        self.channel = "#" + channel # Channel
-        self.botnick = # Your bots nick
-        self.password = # OAuth
+        self.channel = "#" + CHANNEL # Channel
+        self.botnick = USERNAME
+        self.password = OAUTH
         self.connected = False
         self.start = time.time()
         self.streamers = []
@@ -96,7 +100,7 @@ class Chatbot:
                 self.cpgUi.addToQueue(user, msg)
 
     def bot_main(self):
-        self.joinchan("t4rquin")
+        self.joinchan(self.channel)
 
         # start infinite loop to continually check for and receive new info from server
         while 1:
@@ -147,7 +151,7 @@ class Chatbot:
 
 if __name__ == "__main__":
     time.sleep(1)
-    cb = Chatbot("t4rquin")
+    cb = Chatbot()
     cb_thread = threading.Thread(target=cb.run_bot)
     cb_thread.start()
     if cb.cpg_flag:
